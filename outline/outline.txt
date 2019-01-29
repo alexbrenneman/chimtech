@@ -1,4 +1,4 @@
-Outline for Chimtech. 
+Outline for ChimTech. 
 
         Base route"":
                 Home Page:
@@ -7,9 +7,11 @@ Outline for Chimtech.
                         Sign up
                         Log in
                         Services
+                        Support
                     Body:
                         About Chimtech
                         How we can help
+                        Background pics?
                     Footer:
                         Social links?
 
@@ -17,27 +19,51 @@ Outline for Chimtech.
         Route "/signup":     
                 Sign up Page:
                     Simple basic signup Page:
-                        Company name
+                        Nav bar
+                        Name
                         Username
                         Password
                         Confirm Password
                     Maybe pics?
 
-                    Redirect to user page
+                    Redirect to  new-user page
 
+        Route "/new-user":
+                New user welcome page:
+                    Nav bar + logout
+                    "Welcome " + name + "!" 
+                    Have option for company name
+                    Link to add new Customers 
+                    Link to edit existing Customers
+                    Pending jobs(edit) 
+                    Active jobs (edit)
+                    
 
         Route "/login":
                 Login Page:
                     Simple basic signup Page:
+                        Nav bar
                         Username
                         Password
 
-                        Redirect to user page
+                        Redirect to exis-user page
+
+
+        Route "/exis-user":
+                Returning user page:
+                    Nav bar + logout
+                    "Welcome back " + either Username or company name or a combo of both +"!"
+                    Link to add new Customers 
+                    Link to edit + search existing Customers
+                    Pending jobs (edit)
+                    Active jobs (edit)
+                    
 
         
         Route "/services"
                 Services Page:
                     Simple What we do page:
+                        Nav bar
                         Make putting estimates together faster and more orgainized 
                         Eventual payment processing
                         Customer jobs pricing and pictures storage in one place
