@@ -1,0 +1,49 @@
+Outline for Chimtech. 
+
+        Base route"":
+                Home Page:
+                    Nav Bar:
+                        Home
+                        Sign up
+                        Log in
+                        Services
+                    Body:
+                        About Chimtech
+                        How we can help
+                    Footer:
+                        Social links?
+
+
+        Route "/signup":     
+                Sign up Page:
+                    Simple basic signup Page:
+                        Company name
+                        Username
+                        Password
+                        Confirm Password
+                    Maybe pics?
+
+                    Redirect to user page
+
+
+        Route "/login":
+                Login Page:
+                    Simple basic signup Page:
+                        Username
+                        Password
+
+                        Redirect to user page
+
+        
+        Route "/services"
+                Services Page:
+                    Simple What we do page:
+                        Make putting estimates together faster and more orgainized 
+                        Eventual payment processing
+                        Customer jobs pricing and pictures storage in one place
+                        
+
+
+
+
+    
