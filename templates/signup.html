@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+    <body>
+        {% block content %}
+        <h1> Signup </h1>
+        <form action ="/validation" method = "POST" >
+
+            <label for = "username">User Name: </label>
+            <input id = "username" type = "text" name = "username" value="{{username}}" />
+            <p style="color:red"> {{valid_username}}</p>
+
+            <label for = "password">Password: </label>
+            <input id = "password" type = "password" name = "password" />
+            <p style="color:red"> {{valid_password}}</p>
+            
+            <label for = "verify_password">Verify Password: </label>
+            <input id = "verify_password" type = "password" name = "verifypassword" /><br><br>
+
+            <label for = "email">Email (optional): </label>
+            <input id = "email" type = "text" name = "email" value="{{email}}" />
+            <p style="color:red"> {{valid_email}}</p>
+             
+            <input type = "submit" value ="Submit"/>
+        </form>
+        {% endblock %}
+    </body>
+</html>

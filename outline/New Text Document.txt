@@ -1,0 +1,21 @@
+New cust:
+	measurments
+	discription
+	pictures
+	pinging on maps?
+Log In:
+	basic
+Signup: 
+	basic
+Options:
+	stoves
+	lining 
+	fireplace
+Add New Cust:
+	Name
+	Location (Google Maps?)
+	Discription of work
+Pull up existing cust:
+	By name
+	In zip codes
+	by street
