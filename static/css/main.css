@@ -148,3 +148,39 @@ body{
     text-align: center;
     color: aliceblue;
 }
+
+#service-h1{
+    text-align: center;
+    color: aliceblue;
+}
+
+#service-p{
+    text-align: center;
+    color: aliceblue;
+}
+
+#service-ul{
+    text-align: center;
+    color: aliceblue;
+    font-size: 20px;
+}
+
+#signup-h1{
+    text-align: center;
+    color: aliceblue;
+}
+
+#signup-form{
+    text-align: center;
+    color: aliceblue;
+}
+
+#login-h1{
+    text-align: center;
+    color: aliceblue;
+}
+
+#login-form{
+    text-align: center;
+    color: aliceblue;
+}
