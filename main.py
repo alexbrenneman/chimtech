@@ -37,6 +37,10 @@ def no_space(parameter):
     else:
         return False
 
+@app.route("/login")
+def login():
+    return render_template('login.html')
+
 @app.route('/validation', methods=['POST'])
 def validation():   
 

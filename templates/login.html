@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<body>
+        <form action ="/validation" method = "POST" >
+
+            <label for = "username">User Name: </label>
+            <input id = "login-username" type = "text" name = "username" value="" />
+            <p style="color:red"> {{valid_username}}</p>
+
+            <label for = "password">Password: </label>
+            <input id = "password" type = "password" name = "password" />
+            <p style="color:red"> {{valid_password}}</p>
+
+            
+            <input type="submit" value="Submit">
+</body>
+
+
+{% endblock %}
