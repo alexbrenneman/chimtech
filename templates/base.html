@@ -1,17 +1,19 @@
 <!doctype <!DOCTYPE html>
 <html>
     <head>
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
         
         <title>{{title}}</title>
     
     </head>
     <body>
         <div class="topnav">
-            <a href="/">Home</a>
-            <a href="/service">Services</a>
-            <a href="/signup">Signup</a>
+            <a href="/" id="logo">ChimTech</a>
+            <a href="/" id="home-link">Home</a>
+            <a href="/service" id="service-link">Services</a>
+            <a href="/signup" id="signup-link">Signup</a>
         </div>
-        <h1>ChimTech</h1>
+        
 
         {% block content %}
         {% endblock %}

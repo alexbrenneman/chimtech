@@ -1,22 +1,22 @@
-from flask import Flask, request, redirect
-import os
-import jinja2
+from flask import Flask, request, redirect, render_template, session
 
-template_dir = os.path.join(os.path.dirname(__file__), 'templates')
-jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=True)
 
 app = Flask (__name__)
 app.config['DEBUG'] = True
 
+
+
+
+
+
 @app.route("/")
 def home():
-    template = jinja_env.get_template("index.html")
-    return template.render()
+    return render_template("index.html")
 
 @app.route("/signup")
 def index():
-    template = jinja_env.get_template('signup.html')
-    return template.render()
+    
+    return render_template('signup.html')
 
 def length(parameter):
     if len(parameter)> 2 and len(parameter)<21:
@@ -63,13 +63,11 @@ def validation():
     if valid_username=="" and valid_password=="" and valid_email=="":
         return redirect('/welcome?username='+username)
     else:
-        template = jinja_env.get_template('index.html')
-        return template.render(username=username, email=email, valid_username=valid_username, valid_password=valid_password, valid_email = valid_email)
+        return render_template(("index.html"),username=username, email=email, valid_username=valid_username, valid_password=valid_password, valid_email = valid_email)
         
 @app.route('/welcome')
 def welcome():   
-    template = jinja_env.get_template('welcome.html')
     username=request.args.get('username')
-    return template.render(username = username)
+    return render_template(('welcome.html'),username = username)
 
 app.run()
