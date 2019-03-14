@@ -1,27 +1,28 @@
 {% extends "base.html" %}
 
-    <body>
-        {% block content %}
-        <h1 id="signup-h1"> Signup </h1>
-        <form action ="/validation" method = "POST" id="signup-form" >
-
-            <label for = "username">User Name: </label>
-            <input id = "username" type = "text" name = "username" value="{{username}}" />
-            <p style="color:red"> {{valid_username}}</p>
-
-            <label for = "password">Password: </label>
-            <input id = "password" type = "password" name = "password" />
-            <p style="color:red"> {{valid_password}}</p>
-            
-            <label for = "verify_password">Verify Password: </label>
-            <input id = "verify_password" type = "password" name = "verifypassword" /><br><br>
-
-            <label for = "email">Email (optional): </label>
-            <input id = "email" type = "text" name = "email" value="{{email}}" />
-            <p style="color:red"> {{valid_email}}</p>
-             
-            <input type = "submit" value ="Submit"/>
-        </form>
-        {% endblock %}
-    </body>
-</html>
+{% block content %}
+<h1>Register to ChimTech!</h1>
+<form  method="post">
+    <table>
+        <tr>
+            <td><label for="username">Username</label></td>
+            <td>
+                <input name="username" type="username" value="{{username}}" ><span style="color: #ff0000">{{valid_username}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="password">Password</label></td>
+            <td>
+                <input name="password" type="password"><span style="color: #ff0000">{{valid_password}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="verify">Verify Password</label></td>
+            <td>
+                <input name="verify" type="password"><span style="color: #ff0000">{{valid_password}}</span>
+            </td>
+        </tr>
+    </table>
+    <input class="button" type="submit" value="Signup">
+</form>
+{% endblock %}
