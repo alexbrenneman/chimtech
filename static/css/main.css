@@ -2,7 +2,7 @@
     padding-left: 55px;
 }
 #logo{
-    margin-right: 1060px;
+    margin-right: 1000px;
     font-size: 30px;
 }
 
@@ -172,6 +172,12 @@ body{
 
 #signup-form{
     text-align: center;
+    color: aliceblue;
+}
+
+#signup-table{
+  padding-left: 625px;
+  text-align: center;
     color: aliceblue;
 }
 

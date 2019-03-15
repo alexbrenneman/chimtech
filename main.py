@@ -59,9 +59,10 @@ def signup():
     return render_template('signup.html', valid_username=valid_username, username=username , valid_password=valid_password)
 
 
-@app.route('/welcome')
+@app.route('/welcome', methods=['POST', 'GET'])
 def welcome():   
-    username=request.args.get('username')
+    username = request.form.get('username')
+    username = request.args.get('username')
     return render_template(('welcome.html'),username = username)
 
 @app.route('/login', methods= (['GET','POST']))
