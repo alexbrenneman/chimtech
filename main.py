@@ -65,7 +65,7 @@ def welcome():
     username = request.args.get('username')
     return render_template(('welcome.html'),username = username)
 
-@app.route('/login', methods= (['GET','POST']))
+@app.route('/login', methods= ['GET','POST'])
 def login():
     valid_username  = ''
     valid_password = ''
@@ -77,13 +77,22 @@ def login():
         if user and user.password == password:
             session['username'] = username 
             return redirect('/welcome')
-        if not user:
-            valid_username = "Not a valid username"
-        if user and not user.password == password:
-            valid_password = "Not a valid password"
-            
+
+            if not user:
+                valid_username = "Not a valid username"
+            if user and not user.password == password:
+                valid_password = "Not a valid password"
+           
+    return render_template('login.html', valid_username=valid_username, username=username , valid_password=valid_password)
+
+
+
+@app.route('/service')
+def service():
+    return render_template('service.html')
         
-            return render_template('login.html', valid_username=valid_username, username=username , valid_password=valid_password)
+  
+
 
 
     
