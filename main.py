@@ -62,7 +62,6 @@ def signup():
 @app.route('/welcome', methods=['POST', 'GET'])
 def welcome():   
     username = request.form.get('username')
-    username = request.args.get('username')
     return render_template(('welcome.html'),username = username)
 
 @app.route('/login', methods= ['GET','POST'])
@@ -90,6 +89,12 @@ def login():
 @app.route('/service')
 def service():
     return render_template('service.html')
+
+
+@app.route('/logout')
+def logout():
+    del session['username']
+    return redirect('/')
         
   
 
