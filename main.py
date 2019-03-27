@@ -24,11 +24,26 @@ class User(db.Model):
     appliance = db.Column(db.String(150))
 
 
+def symbol(parameter):
+    if parameter.count("@") == 1 and parameter.count(".") ==1 :
+        return True
+    else:
+        return False
+
+# Check for spaces in function, returning True if there are no spaces
+def no_space(parameter):
+    if parameter.count(" ") == 0:
+        return True    
+    else:
+        return False
+
+
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     valid_username  = ''
     valid_password = ''
     username = ''
+    email = ''
     appliance = ''
     
 
@@ -36,6 +51,7 @@ def signup():
         username = request.form['username']
         password = request.form['password']
         verify = request.form['verify']
+        email = request.form['email']
         
 
         existing_user = User.query.filter_by(username=username).first()
@@ -46,11 +62,16 @@ def signup():
             
             if len(password) < 4 or password != verify:
                 valid_password = "Not a valid password"
+
+            if len(email) and symbol(email) and no_space(email) or email == "":
+                valid_email = ""
+            else:
+                valid_email = "Not a valid email"
             
             
 
-            if valid_username=="" and valid_password=="" and appliance=="":
-                new_user = User(username = username, password = password, appliance = appliance)
+            if valid_username=="" and valid_password=="" and appliance=="" and valid_email=="":
+                new_user = User(username = username, password = password, appliance = appliance, email = email)
                 db.session.add(new_user)
                 db.session.commit()
                 session['username'] = username
@@ -59,7 +80,7 @@ def signup():
         else:
             valid_username = 'Duplicate user'
 
-    return render_template('signup.html', valid_username=valid_username, username=username , valid_password=valid_password , appliance=appliance)
+    return render_template('signup.html', valid_username=valid_username, username=username , valid_password=valid_password , appliance=appliance , email=email)
 
 
 @app.route('/welcome', methods=['POST', 'GET'])
