@@ -1,5 +1,5 @@
 .topnav{
-    padding-left: 55px;
+    padding-left: 45px;
 }
 #logo{
     margin-right: 1000px;
@@ -37,6 +37,11 @@ a:link, a:visited {
 }
 
 #login-link{
+    font-size: 20px;
+    padding-right: 5px;
+}
+
+#logout-link{
     font-size: 20px;
     padding-right: 5px;
 }
@@ -193,5 +198,11 @@ body{
 
 #welcome-h1{
   text-align: center;
+  color: aliceblue;
+}
+
+#appliance-form{
+  text-align: left;
+  margin-left: 30px;
   color: aliceblue;
 }

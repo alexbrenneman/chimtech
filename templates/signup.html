@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 id="signup-h1">Register to ChimTech!</h1>
+<h1 id="signup-h1">Sign Up to ChimTech!</h1>
 <form  method="post" id="signup-form">
     <table id="signup-table">
         <tr>
@@ -23,6 +23,17 @@
             </td>
         </tr>
     </table>
+    <form id="appliance-form" >
+        <p>
+           <label>Appliance Type</label>
+           <select id = "appliance">
+             <option value = "1"> </option>
+             <option value = "2" name="1woodstove">Woodstove</option>
+             <option value = "3" name="2fireplace">Fireplace</option>
+             <option value = "4" name="3gasstove">Gas Stove</option>
+             <option value = "5" name="4gaslogs">Gas Logs</option>
+           </select>
+        </p>
     <input class="button" type="submit" value="Signup">
 </form>
 {% endblock %}

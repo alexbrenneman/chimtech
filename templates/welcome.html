@@ -3,6 +3,21 @@
         
         {% block content %}
         <h1 id="welcome-h1"> Welcome, {{username}}!</h1>
+        
+        <br>
+        <br>
+
+        <form id="appliance-form" >
+                <h2>
+                   <label>Appliance Type</label>
+                   <select id = "appliance-type">
+                     <option value = "1">Wood Stove</option>
+                     <option value = "2">Fireplace</option>
+                     <option value = "3">Gas Logs</option>
+                     <option value = "4">Gas Stove</option>
+                   </select>
+                </h2>
+            
         {% endblock %}
 
     </body>

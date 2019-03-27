@@ -21,7 +21,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(120))
-    
+    appliance = db.Column(db.String(150))
 
 
 @app.route('/signup', methods=['POST', 'GET'])
@@ -29,6 +29,7 @@ def signup():
     valid_username  = ''
     valid_password = ''
     username = ''
+    appliance = ''
     
 
     if request.method == 'POST':
@@ -45,9 +46,11 @@ def signup():
             
             if len(password) < 4 or password != verify:
                 valid_password = "Not a valid password"
+            
+            
 
-            if valid_username=="" and valid_password=="":
-                new_user = User(username = username, password = password)
+            if valid_username=="" and valid_password=="" and appliance=="":
+                new_user = User(username = username, password = password, appliance = appliance)
                 db.session.add(new_user)
                 db.session.commit()
                 session['username'] = username
@@ -56,7 +59,7 @@ def signup():
         else:
             valid_username = 'Duplicate user'
 
-    return render_template('signup.html', valid_username=valid_username, username=username , valid_password=valid_password)
+    return render_template('signup.html', valid_username=valid_username, username=username , valid_password=valid_password , appliance=appliance)
 
 
 @app.route('/welcome', methods=['POST', 'GET'])
@@ -73,14 +76,15 @@ def login():
         username = request.form['username']
         password = request.form['password']
         user = User.query.filter_by(username=username).first()
+        
         if user.username == username and user.password == password:
             session['username'] = username 
             return redirect('/welcome')
 
-            if not user:
-                valid_username = "Not a valid username"
-            if user and not user.password == password:
-                valid_password = "Not a valid password"
+        if not user.user == username:
+            valid_username = "Not a valid username"
+        if not user.password == password:
+            valid_password = "Not a valid password"
            
     return render_template('login.html', valid_username=valid_username, username=username , valid_password=valid_password)
 
