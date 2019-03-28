@@ -202,7 +202,10 @@ body{
 }
 
 #appliance-form{
-  text-align: left;
-  margin-left: 30px;
+  text-align: center;
   color: aliceblue;
+}
+
+.signup-div{
+  text-align: center;
 }

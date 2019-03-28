@@ -22,6 +22,7 @@ class User(db.Model):
     username = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(120))
     appliance = db.Column(db.String(150))
+    email = db.Column(db.String(150))
 
 
 def symbol(parameter):
@@ -52,12 +53,12 @@ def signup():
         password = request.form['password']
         verify = request.form['verify']
         email = request.form['email']
-        
+        appliance = request.form['appliance']
 
         existing_user = User.query.filter_by(username=username).first()
         if not existing_user:
 
-            if len(username) < 4:
+            if len(username) < 1:
                 valid_username = "Not a valid username"
             
             if len(password) < 4 or password != verify:
@@ -70,8 +71,8 @@ def signup():
             
             
 
-            if valid_username=="" and valid_password=="" and appliance=="" and valid_email=="":
-                new_user = User(username = username, password = password, appliance = appliance, email = email)
+            if valid_username=="" and valid_password=="" and valid_email=="" and appliance=="":
+                new_user = User(username = username, password = password, email = email, appliance = appliance)
                 db.session.add(new_user)
                 db.session.commit()
                 session['username'] = username
@@ -80,13 +81,14 @@ def signup():
         else:
             valid_username = 'Duplicate user'
 
-    return render_template('signup.html', valid_username=valid_username, username=username , valid_password=valid_password , appliance=appliance , email=email)
+    return render_template('signup.html', valid_username=valid_username, username=username , valid_password=valid_password , email=email , appliance=appliance)
 
 
 @app.route('/welcome', methods=['POST', 'GET'])
 def welcome():   
     username = request.form.get('username')
-    return render_template(('welcome.html'),username = username)
+    email = request.form.get('email')
+    return render_template(('welcome.html'),username = username, email = email)
 
 @app.route('/login', methods= ['GET','POST'])
 def login():
