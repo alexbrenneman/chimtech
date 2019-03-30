@@ -209,3 +209,23 @@ body{
 .signup-div{
   text-align: center;
 }
+
+#cleaning_reviews_h1{
+  text-align: center;
+  color: aliceblue;
+}
+
+#restoration_reviews_h1{
+  text-align: center;
+  color: aliceblue;
+}
+
+#inspection_reviews_h1{
+  text-align: center;
+  color: aliceblue;
+}
+
+#construction_reviews_h1{
+  text-align: center;
+  color: aliceblue;
+}

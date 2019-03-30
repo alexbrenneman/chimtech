@@ -113,9 +113,25 @@ def login():
 
 
 
-@app.route('/service')
+@app.route('/reviews')
 def service():
-    return render_template('service.html')
+    return render_template('reviews.html')
+
+@app.route('/cleaning_reviews')
+def cleaning_reviews():
+    return render_template('cleaning-reviews.html')
+
+@app.route('/restoration_reviews')
+def restoration_reviews():
+    return render_template('restoration_reviews.html')
+
+@app.route('/inspection_reviews')
+def inspection_reviews():
+    return render_template('inspection_reviews.html')
+
+@app.route('/construction_reviews')
+def construction_reviews():
+    return render_template('construction_reviews.html')
 
 
 @app.route('/logout')
