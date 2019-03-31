@@ -21,7 +21,6 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(120))
-    appliance = db.Column(db.String(150))
     email = db.Column(db.String(150))
 
 
@@ -45,7 +44,6 @@ def signup():
     valid_password = ''
     username = ''
     email = ''
-    appliance = ''
     
 
     if request.method == 'POST':
@@ -53,7 +51,7 @@ def signup():
         password = request.form['password']
         verify = request.form['verify']
         email = request.form['email']
-        appliance = request.form['appliance']
+        
 
         existing_user = User.query.filter_by(username=username).first()
         if not existing_user:
@@ -68,11 +66,9 @@ def signup():
                 valid_email = ""
             else:
                 valid_email = "Not a valid email"
-            
-            
 
-            if valid_username=="" and valid_password=="" and valid_email=="" and appliance=="":
-                new_user = User(username = username, password = password, email = email, appliance = appliance)
+            if valid_username=="" and valid_password=="" and valid_email=="":
+                new_user = User(username = username, password = password, email = email)
                 db.session.add(new_user)
                 db.session.commit()
                 session['username'] = username
@@ -81,7 +77,7 @@ def signup():
         else:
             valid_username = 'Duplicate user'
 
-    return render_template('signup.html', valid_username=valid_username, username=username , valid_password=valid_password , email=email , appliance=appliance)
+    return render_template('signup.html', valid_username=valid_username, username=username , valid_password=valid_password , email=email)
 
 
 @app.route('/welcome', methods=['POST', 'GET'])
