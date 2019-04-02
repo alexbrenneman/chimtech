@@ -5,12 +5,17 @@
         <form id="login-form" method="POST">
 
             <label for = "username">User Name: </label>
+            
             <input id = "login-username" type = "text" name = "username" value="" />
+            {%if error%}
             <p style="color:red"> {{valid_username}}</p>
+            {%endif%}
 
             <label for = "password">Password: </label>
             <input id = "password" type = "password" name = "password" />
+            {%if error%}
             <p style="color:red"> {{valid_password}}</p>
+            {%endif%}
 
             
             <input type="submit" value="Submit">
