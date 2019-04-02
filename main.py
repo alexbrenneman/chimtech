@@ -45,7 +45,7 @@ def signup():
     valid_password = ''
     username = ''
     email = ''
-    zip = ''
+    
     
 
     if request.method == 'POST':
@@ -53,7 +53,6 @@ def signup():
         password = request.form['password']
         verify = request.form['verify']
         email = request.form['email']
-        zip = request.form['zip']
 
         existing_user = User.query.filter_by(username=username).first()
         if not existing_user:
@@ -69,15 +68,14 @@ def signup():
             else:
                 valid_email = "Not a valid email"
 
-            if len(zip) <= 4:
-                valid_zip = "Not a valid zip code"
+        
 
             if valid_username=="" and valid_password=="" and valid_email=="":
                 new_user = User(username = username, password = password, email = email)
                 db.session.add(new_user)
                 db.session.commit()
                 session['username'] = username
-                return render_template('/welcome',username = username, email = email)
+                return render_template('/welcome.html',username = username, email = email)
                 
         else:
             valid_username = 'Duplicate user'
@@ -97,7 +95,7 @@ def login():
     valid_username  = 'Not valid username'
     valid_password = 'Not valid password'
     username = ''
-    email=' hello'
+    email=''
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
