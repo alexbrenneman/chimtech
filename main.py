@@ -1,4 +1,4 @@
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 error = False
@@ -38,6 +38,9 @@ def no_space(parameter):
     else:
         return False
 
+def mysession():
+     mysession = session.get('username', None)
+
 
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
@@ -45,6 +48,7 @@ def signup():
     valid_password = ''
     username = ''
     email = ''
+    valid_email = ''
     
     
 
@@ -67,21 +71,27 @@ def signup():
                 valid_email = ""
             else:
                 valid_email = "Not a valid email"
-
-        
-
-            if valid_username=="" and valid_password=="" and valid_email=="":
-                new_user = User(username = username, password = password, email = email)
-                db.session.add(new_user)
-                db.session.commit()
-                session['username'] = username
-                return render_template('/welcome.html',username = username, email = email)
-                
         else:
             valid_username = 'Duplicate user'
+        
+
+        if valid_username=="" and valid_password=="" and valid_email=="":
+            new_user = User(username = username, password = password, email = email)
+            db.session.add(new_user)
+            db.session.commit()
+            session['username'] = username
+            return render_template('/welcome.html',username = username, email = email)
+                
+        
 
     return render_template('signup.html', valid_username=valid_username, username=username , valid_password=valid_password , email=email)
 
+@app.route('/profile', methods=['POST','GET'])
+def profile():
+    username = request.form.get('username')
+    email = request.form.get('email')
+    
+    return render_template(("/profile.html"),username = username, email = email)
 
 @app.route('/welcome', methods=['POST', 'GET'])
 def welcome():   
@@ -141,6 +151,46 @@ def logout():
     return redirect('/')
         
   
+
+
+class Companies(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(5000), unique=True)
+    street = db.Column(db.String(5000))
+    city = db.Column(db.String(5000))
+
+    def __init__(self, name, street, city):
+        self.name = name
+        self.street = street
+        self.city = city
+
+
+    @app.route('/companies', methods = ['GET','POST'])
+    def add_companies():
+        valid_name = ""
+        valid_street = ""
+        valid_city = ""
+        name = ""
+        street = ""
+        city = ""
+
+        if request.method == 'POST':
+            name = request.form['name']
+            street = request.form['street']
+            city = request.form['city']
+            
+
+
+
+        if valid_name=="" and valid_street=="" and valid_city=="":
+            new_companies = Companies(name = name, street = street, city = city)
+            db.session.add(new_companies)
+            db.session.commit()
+            return render_template('/companies.html',name =name, city = city, street = street, valid_city=valid_city, valid_name=valid_name, valid_street=valid_street)
+        
+        return redirect("/")
+        
+
 
 
 

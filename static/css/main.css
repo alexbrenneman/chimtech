@@ -46,6 +46,16 @@ a:link, a:visited {
     padding-right: 5px;
 }
 
+#profile-link{
+  font-size: 20px;
+  padding-right: 5px;
+}
+
+#companies-link{
+  font-size: 20px;
+  padding-right: 5px;
+}
+
 * {box-sizing:border-box}
 
 /* Slideshow container */
