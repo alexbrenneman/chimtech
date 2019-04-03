@@ -1,0 +1,40 @@
+{%extends "base.html" %}
+{% block content %}
+<div class="companies-add-list">
+    <h1> Add to our Current Company List</h1>
+       <form id="company_add_form">
+            <table id="company_add_table">
+                <tr>
+                    <td><label for="name">Company Name:</label></td>
+                    <td>
+                        <input type="text" name="name" value="{{name}}"><span style="color: #ff0000">{{valid_name}}</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label for="street">Street Address:</label></td>
+                    <td>
+                        <input type="text" name="street" value="{{street}}"><span style="color:#ff0000">{{valid_street}}</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label for="city">City:</label></td>
+                    <td>
+                        <input type="text" name="city" value="{{city}}"><span style="color:#ff0000">{{valid_city}}</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label for="zip_code">Zip Code:</label></td>
+                    <td>
+                        <input type="text" name="zip_code" value="{{zip_code}}"><span style="color:#ff0000">{{valid_zip_code}}</span>
+                    </td>
+                </tr>
+                
+
+            </table>
+            <input class="button" type="submit" value="Save Company"/>
+        </form>  
+</div>
+{% endblock %}

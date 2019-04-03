@@ -158,37 +158,49 @@ class Companies(db.Model):
     name = db.Column(db.String(5000), unique=True)
     street = db.Column(db.String(5000))
     city = db.Column(db.String(5000))
+    zip_code = db.Column(db.Integer)
 
-    def __init__(self, name, street, city):
-        self.name = name
-        self.street = street
-        self.city = city
-
+    
 
     @app.route('/companies', methods = ['GET','POST'])
     def add_companies():
         valid_name = ""
         valid_street = ""
         valid_city = ""
+        valid_zip_code = ""
         name = ""
         street = ""
         city = ""
+        zip_code = ""
 
-        if request.method == 'POST':
-            name = request.form['name']
-            street = request.form['street']
-            city = request.form['city']
-            
+        existing_company = Companies.query.filter_by(name=name).first()
+        
+        if not existing_company:
+            if request.method == 'POST':
+                name = request.form['name']
+                street = request.form['street']
+                city = request.form['city']
+                zip_code = request.form['zip_code']
+
+                if len(name) < 2:
+                    valid_name = "Not a Valid Company Name"
+                
+                if len(street) < 1:
+                    valid_street = "Not a Valid Street Name"
+
+                if len(city) < 2:
+                    valid_city ="Not a Valid City"
+        else:
+            valid_name = "Company Already Exists"
 
 
-
-        if valid_name=="" and valid_street=="" and valid_city=="":
-            new_companies = Companies(name = name, street = street, city = city)
+        if valid_name=="" and valid_street=="" and valid_city=="" and valid_zip_code=="":
+            new_companies = Companies(name = name, street = street, city = city, zip_code=zip_code)
             db.session.add(new_companies)
             db.session.commit()
-            return render_template('/companies.html',name =name, city = city, street = street, valid_city=valid_city, valid_name=valid_name, valid_street=valid_street)
-        
-        return redirect("/")
+            return render_template('/',name =name, city = city, street = street, zip_code=zip_code, valid_city=valid_city, valid_name=valid_name, valid_street=valid_street, valid_zip_code=valid_zip_code)
+        else:   
+            return render_template("/companies.html")
         
 
 
