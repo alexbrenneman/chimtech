@@ -155,57 +155,59 @@ def logout():
 
 class Companies(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(5000), unique=True)
-    street = db.Column(db.String(5000))
-    city = db.Column(db.String(5000))
+    name = db.Column(db.String(120), unique=True)
+    street = db.Column(db.String(120))
+    city = db.Column(db.String(120))
     zip_code = db.Column(db.Integer)
 
     
 
-    @app.route('/add_companies', methods = ['GET','POST'])
-    def add_companies():
-        valid_name = ""
-        valid_street = ""
-        valid_city = ""
-        valid_zip_code = ""
-        name = ""
-        street = ""
-        city = ""
-        zip_code = ""
+@app.route('/add_companies', methods = ['POST','GET'])
+def add_companies():
+    '''valid_name = ""
+    valid_street = ""
+    valid_city = ""
+    valid_zip_code = ""'''
+    name = ""
+    street = ""
+    city = ""
+    zip_code = ""
 
-        existing_company = Companies.query.filter_by(name=name).first()
+    existing_company = Companies.query.filter_by(name=name).first()
         
-        if not existing_company:
-            if request.method == 'POST':
-                name = request.form['name']
-                street = request.form['street']
-                city = request.form['city']
-                zip_code = request.form['zip_code']
+    '''if not existing_company:
+        if request.method == 'POST':
+            name = request.form['name']
+            street = request.form['street']
+            city = request.form['city']
+            zip_code = request.form['zip_code']
 
-                if len(name) < 2:
-                    valid_name = "Not a Valid Company Name"
+            if len(name) < 2:
+                valid_name = "Not a Valid Company Name"
                 
-                if len(street) < 1:
-                    valid_street = "Not a Valid Street Name"
+            if len(street) < 1:
+                valid_street = "Not a Valid Street Name"
 
-                if len(city) < 2:
+            if len(city) < 2:
                     valid_city ="Not a Valid City"
-        else:
-            valid_name = "Company Already Exists"
+            if len(zip_code) <= 4:
+                    valid_zip_code = "Not a valid zip code"
+    else:
+        valid_name = "Company Already Exists" '''
 
 
-        if valid_name=="" and valid_street=="" and valid_city=="" and valid_zip_code=="":
-            new_companies = Companies(name = name, street = street, city = city, zip_code=zip_code)
-            db.session.add(new_companies)
-            db.session.commit()
-            return render_template('/companies',name =name, city = city, street = street, zip_code=zip_code, valid_city=valid_city, valid_name=valid_name, valid_street=valid_street, valid_zip_code=valid_zip_code)
-        else:   
-            return render_template("/add_companies.html")
-        
+    if name=="" and street=="" and city=="" and zip_code=="":
+        new_companies = Companies(name = name, street = street, city = city, zip_code = zip_code)
+        db.session.add(new_companies)
+        db.session.commit()
+        return render_template('/companies.html',name = name, city = city, street = street, zip_code=zip_code)
+    else:   
+        return "Not working"
+    return render_template("add_companies.html")    
 
-    @app.route("/companies")
-    def companies():
-        return render_template("/companies.html")
+@app.route("/companies")
+def companies():
+    return render_template("/companies.html")
 
 
     
