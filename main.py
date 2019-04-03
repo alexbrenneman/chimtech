@@ -162,7 +162,7 @@ class Companies(db.Model):
 
     
 
-    @app.route('/companies', methods = ['GET','POST'])
+    @app.route('/add_companies', methods = ['GET','POST'])
     def add_companies():
         valid_name = ""
         valid_street = ""
@@ -198,12 +198,14 @@ class Companies(db.Model):
             new_companies = Companies(name = name, street = street, city = city, zip_code=zip_code)
             db.session.add(new_companies)
             db.session.commit()
-            return render_template('/',name =name, city = city, street = street, zip_code=zip_code, valid_city=valid_city, valid_name=valid_name, valid_street=valid_street, valid_zip_code=valid_zip_code)
+            return render_template('/companies',name =name, city = city, street = street, zip_code=zip_code, valid_city=valid_city, valid_name=valid_name, valid_street=valid_street, valid_zip_code=valid_zip_code)
         else:   
-            return render_template("/companies.html")
+            return render_template("/add_companies.html")
         
 
-
+    @app.route("/companies")
+    def companies():
+        return render_template("/companies.html")
 
 
     
