@@ -1,6 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Current Company List</h1>
-<a href="/add_companies">Add Companies</a>
+<h1 id="companies-h1">Current Company List</h1>
+<a href="/add_companies" id="add-companies-link">Add Companies</a>
+<ul id="companies-ul">
+
+{% for company in companies %}
+    <a href="/company?companies={{company.id}}">{{company.name}}</a><br>
+    <form action="/companies", method="POST">
+        <input type="text" value="1" name="rating" style="display:none;">
+        <input type="text" value = "{{company.name}}" style="display:none;" name="com">
+        <input type="submit" value="Like {{company.rating}}">
+
+    </form> 
+{% endfor %}
+</ul>
+
 
 {% endblock %}

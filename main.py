@@ -88,10 +88,12 @@ def signup():
 
 @app.route('/profile', methods=['POST','GET'])
 def profile():
-    username = request.form.get('username')
-    email = request.form.get('email')
-    
-    return render_template(("/profile.html"),username = username, email = email)
+    if "username" in session:
+        user = User.query.filter_by(username=session["username"]).first()
+    else:
+        return render_template("profile.html")
+        
+    return render_template(("/profile.html"),user=user)
 
 @app.route('/welcome', methods=['POST', 'GET'])
 def welcome():   
@@ -159,55 +161,94 @@ class Companies(db.Model):
     street = db.Column(db.String(120))
     city = db.Column(db.String(120))
     zip_code = db.Column(db.Integer)
+    phone = db.Column(db.String(100))
+    site = db.Column(db.String(120))
+    rating = db.Column(db.Integer)
 
-    
-
-@app.route('/add_companies', methods = ['POST','GET'])
+@app.route('/add_companies', methods = ['POST'])
 def add_companies():
-    '''valid_name = ""
+    valid_name = ""
     valid_street = ""
     valid_city = ""
-    valid_zip_code = ""'''
+    valid_zip_code = ""
+    valid_phone = ""
+    valid_site = ""
     name = ""
     street = ""
     city = ""
     zip_code = ""
+    phone = ""
+    site = ""
 
     existing_company = Companies.query.filter_by(name=name).first()
         
-    '''if not existing_company:
-        if request.method == 'POST':
-            name = request.form['name']
-            street = request.form['street']
-            city = request.form['city']
-            zip_code = request.form['zip_code']
-
-            if len(name) < 2:
-                valid_name = "Not a Valid Company Name"
-                
-            if len(street) < 1:
-                valid_street = "Not a Valid Street Name"
-
-            if len(city) < 2:
-                    valid_city ="Not a Valid City"
-            if len(zip_code) <= 4:
-                    valid_zip_code = "Not a valid zip code"
-    else:
-        valid_name = "Company Already Exists" '''
+   
+        
+    name = request.form['name']
+    street = request.form['street']
+    city = request.form['city']
+    zip_code = request.form['zip_code']
+    phone = request.form['phone']
+    site = request.form['site']
 
 
-    if name=="" and street=="" and city=="" and zip_code=="":
-        new_companies = Companies(name = name, street = street, city = city, zip_code = zip_code)
+    if len(name) < 2:
+        valid_name = "Not a Valid Company Name"
+        
+    if len(street) < 1:
+        valid_street = "Not a Valid Street Name"
+
+    if len(city) < 2:
+            valid_city ="Not a Valid City"
+    
+    if len(zip_code) <= 4:
+        valid_zip_code = "Not a valid zip code"
+
+    if len(phone) < 10:
+        valid_phone = "Not a valid phone number"
+
+    if len(site) < 2:
+        valid_site = "Not a valid website"
+
+    
+    
+
+        
+
+
+    if valid_name=="" and valid_street=="" and valid_city=="" and valid_zip_code=="" and valid_phone == "" and valid_site == "":
+        new_companies = Companies(name = name, street = street, city = city, zip_code = zip_code, phone=phone, site=site, rating=0)
         db.session.add(new_companies)
         db.session.commit()
-        return render_template('/companies.html',name = name, city = city, street = street, zip_code=zip_code)
+        return redirect('/companies')
     else:   
-        return "Not working"
-    return render_template("add_companies.html")    
+        return render_template("add_companies.html", valid_city =valid_city, valid_name=valid_name, valid_street=valid_street, valid_zip_code=valid_zip_code, valid_phone=valid_phone, valid_site=valid_site)
 
-@app.route("/companies")
+@app.route('/add_companies', methods = ['GET'])
+def add_temp():
+    return render_template("add_companies.html")
+
+
+
+    
+
+
+@app.route("/companies", methods=["POST","GET"])
 def companies():
-    return render_template("/companies.html")
+    rating =""
+    com = ""
+    name = ""
+    companies = Companies.query.all()
+    if request.method == 'POST':
+        rating = request.form['rating']
+        com = request.form["com"]
+        user = Companies.query.filter_by(name = com).first()
+        user.rating += 1
+        db.session.commit()
+    else:
+        return render_template('/companies.html', companies=companies)
+        
+    return render_template("/companies.html", companies=companies, rating=rating)
 
 
     

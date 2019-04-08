@@ -2,7 +2,7 @@
     padding-left: 45px;
 }
 #logo{
-    margin-right: 1000px;
+    margin-right: 800px;
     font-size: 30px;
 }
 
@@ -238,4 +238,21 @@ body{
 #construction_reviews_h1{
   text-align: center;
   color: aliceblue;
+}
+
+#companies-h1{
+  text-align: center;
+  color: aliceblue;
+}
+
+#companies-ul{
+  text-align: center;
+  color: aliceblue;
+}
+
+#add-companies-link{
+  text-align: center;
+  color: aliceblue;
+  font-size: 20px;
+  
 }
