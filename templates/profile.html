@@ -3,8 +3,13 @@
         
         {% block content %}
         {% if user %}
-            <h1 id="welcome-h1"> Welcome, {{user.username}}!</h1>
-            <h2>{{user.email}}</h2>
+            <h1 id="welcome-h1"><strong> Welcome, {{user.username}}!</strong></h1>
+            <h3><u>Email Address</u>: {{user.email}}</h3>
+            <h3><u>Street Address</u>: {{user.address}}</h3>
+            <h3><u>City</u>: {{user.city}}</h3>
+            <h3><u>State</u>: {{user.state}}</h3>
+            <h3><u>Zip Code</u>: {{user.zipcode}}</h3>
+            <h3><u>Appliance Type</u>: {{user.appliance}}</h3>
         {% endif %}    
         
         
