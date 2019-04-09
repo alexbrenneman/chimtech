@@ -1,4 +1,4 @@
-.topnav{
+/*.topnav{
     padding-left: 45px;
 }
 #logo{
@@ -54,7 +54,7 @@ a:link, a:visited {
 #companies-link{
   font-size: 20px;
   padding-right: 5px;
-}
+}*/
 
 * {box-sizing:border-box}
 
@@ -141,7 +141,7 @@ a:link, a:visited {
   to {opacity: 1}
 }
 
-#home-about{
+/*#home-about{
     text-align: center;
     color: aliceblue;
 }
@@ -255,4 +255,5 @@ body{
   color: aliceblue;
   font-size: 20px;
   
-}
+}*/
+

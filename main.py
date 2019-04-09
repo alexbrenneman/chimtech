@@ -151,6 +151,9 @@ def construction_reviews():
 def logout():
     del session['username']
     return redirect('/')
+
+
+
         
   
 
@@ -227,6 +230,13 @@ def add_companies():
 @app.route('/add_companies', methods = ['GET'])
 def add_temp():
     return render_template("add_companies.html")
+
+
+@app.before_request
+def require_login():
+    allowed_routes = ['login', 'signup', 'index']
+    if request.endpoint not in allowed_routes and 'username' not in session:
+        return redirect('/login')
 
 
 
